@@ -5,6 +5,24 @@ pub struct Sites {
 }
 
 impl Sites {
+    pub fn get(&mut self, url: String) -> Option<String> {
+	self.sites.get_mut(&url).cloned()
+    }
+
+    pub fn replace(&mut self, name: String, data: String) -> &mut Sites {
+	self.rm(name.clone()).add(name,data)
+    }
+
+    pub fn rm(&mut self, name: String) -> &mut Sites {
+	self.sites.remove(&name);
+	self
+    }
+
+    pub fn add(&mut self, name: String, data: String) -> &mut Sites {
+	self.sites.insert(name, data);
+	self
+    }
+    
     pub fn init() -> Sites {
         let mut map = HashMap::new();
         map.insert(

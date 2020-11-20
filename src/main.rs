@@ -87,7 +87,6 @@ impl Choice {
     fn checkall(self) -> Result<(), anyhow::Error> {
         let mut web_struct = data::Sites::init();
         let mut sites = fetcher::run(web_struct);
-        println!("{:?}", sites.sites.get("inet"));
         println!("{:?}", sites.sites.get("komplett"));
         Ok(())
     }
