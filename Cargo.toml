@@ -1,0 +1,16 @@
+[package]
+name = "ryzen"
+version = "0.1.0"
+authors = ["Calin Capitanu <calincapitanu@gmail.com>"]
+edition = "2018"
+
+
+[dependencies]
+tokio = { version = "0.2", features = ["full"] }
+curl = "0.4.34"
+hyper = "0.13"
+anyhow = "1.0"
+fern = { version = "0.6", features = [ "colored" ] }
+log = "0.4"
+structopt = "0.3"
+chrono = "0.4"
