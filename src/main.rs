@@ -1,10 +1,9 @@
-use structopt::StructOpt;
 use fern::colors::{Color, ColoredLevelConfig};
-use log::{error};
+use log::error;
+use structopt::StructOpt;
 
-use ryzen::fetcher;
 use ryzen::data;
-
+use ryzen::fetcher;
 
 #[derive(StructOpt, Debug, Clone)]
 #[structopt(
@@ -22,24 +21,24 @@ struct Ryzen {
 }
 
 impl Ryzen {
-    fn run(self){
-	self.logging();
-	match self.cmd.run(){
-	    Ok(()) => (),
-	    Err(err) => error!("{:?}", &err),
-	}
+    fn run(self) {
+        self.logging();
+        match self.cmd.run() {
+            Ok(()) => (),
+            Err(err) => error!("{:?}", &err),
+        }
     }
 
-    fn logging(&self){
-	let colors_line = ColoredLevelConfig::new()
-	    .error(Color::Red)
+    fn logging(&self) {
+        let colors_line = ColoredLevelConfig::new()
+            .error(Color::Red)
             .warn(Color::Yellow)
             .info(Color::White)
             .debug(Color::BrightBlack)
             .trace(Color::BrightBlack);
-	let colors_level = colors_line.clone().info(Color::Green);
-	fern::Dispatch::new()
-	    .format(move |out, message, record| {
+        let colors_level = colors_line.clone().info(Color::Green);
+        fern::Dispatch::new()
+            .format(move |out, message, record| {
                 out.finish(format_args!(
                     "{color_line}{date} {level}{color_line} :: {message}\x1B[0m",
                     color_line = format_args!(
@@ -82,21 +81,18 @@ impl Goal {
     help = "Takes no other input, just checks all the sites."
 )]
 
-
-struct Choice {
-}
+struct Choice {}
 
 impl Choice {
     fn checkall(self) -> Result<(), anyhow::Error> {
-	let mut web_struct = data::Sites::init();
-	let mut sites = fetcher::run(web_struct);	
-	println!("{:?}", sites.sites.get("inet"));
-	println!("{:?}", sites.sites.get("komplett"));
+        let mut web_struct = data::Sites::init();
+        let mut sites = fetcher::run(web_struct);
+        println!("{:?}", sites.sites.get("inet"));
+        println!("{:?}", sites.sites.get("komplett"));
         Ok(())
     }
 }
 
-
 fn main() {
-    Ryzen::from_args().run(); 
+    Ryzen::from_args().run();
 }
