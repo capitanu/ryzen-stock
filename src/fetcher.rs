@@ -4,9 +4,8 @@ use std::str;
 
 use crate::data;
 
-pub fn run(mut web_struct: data::Sites) -> data::Sites {
-    let all = ["inet", "komplett", "webhallen", "proshop", "elgiganten"];
-    for &site in &all {
+pub fn run(mut web_struct: data::Sites, list: &[&str]) -> data::Sites {
+    for &site in list {
         match web_struct.get(site.to_string()) {
             Some(x) => {
 		let mut res = Vec::new();
