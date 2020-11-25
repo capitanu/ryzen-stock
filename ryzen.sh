@@ -11,7 +11,7 @@ RESULT2=$(cat /home/calin/repos/github.com/capitanu/ryzen/ryzen_inet.txt)
 if [ "$RESULT1" != "$RESULT2" ]
 then
     /home/calin/.local/bin/ryzen inet > /home/calin/repos/github.com/capitanu/ryzen/ryzen_inet.txt &&
-    /usr/bin/dunstify -u 2 "$RESULT2"
+    /usr/bin/dunstify -u 2 "$RESULT1"
 fi
 
 RESULT3=$(ryzen proshop)
